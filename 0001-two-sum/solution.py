@@ -5,17 +5,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        for i in nums:
-            solution = []
-            add_num = target - i
-            try:
-                index = nums.index(add_num, nums.index(i)+1)
-            except ValueError:
-                continue
-            if (nums.index(i)!= index):
-                if (i + nums[index] == target):
-                    solution.append(nums.index(i))
-                    solution.append(index)
-                    break
-        return solution
+        h_result= {}
+        result=[]
         
+        for i,num in enumerate(nums):
+            check= target-num
+            if check in h_result:
+                return [h_result[check], i]
+            h_result[num]=i
+        return []
