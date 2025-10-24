@@ -5,13 +5,12 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         permutations = []
-        
-        def recursive(start):
-            if start == len(nums):
-                return permutations.append(nums[:])
-            for i in range(start, len(nums)):
-                nums[start], nums[i]= nums[i], nums[start]
-                recursive(start +1)
-                nums[start], nums[i]= nums[i], nums[start]
-        recursive(0)
+        self.dfs(nums, [], permutations)
         return permutations
+    
+    def dfs(self, nums, path, permutations):
+        if not nums:
+            permutations.append(path)
+            # return # backtracking
+        for i in range(len(nums)):
+            self.dfs(nums[:i]+nums[i+1:], path+[nums[i]], permutations)
